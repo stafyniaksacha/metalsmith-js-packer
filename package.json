@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-js-packer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Javascript packer/minifier/uglifier for metalsmith",
   "main": "index.js",
   "scripts": {

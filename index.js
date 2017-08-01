@@ -15,9 +15,10 @@ module.exports = options => {
 
   let inline = options.inline || false;
   let siteRootPath = options.siteRootPath || '/';
-  let ouputPath = options.ouputPath || 'assets/javascript/';
+  let outputPath = options.outputPath || 'assets/javascript/';
   let uglifyEnabled = options.uglify || true;
   let uglifyOptions = options.uglifyOptions || {};
+  let removeLocalSrc = options.removeLocalSrc || false;
 
   return (files, metalsmith, done) => {
     let scripts = {};
@@ -101,14 +102,24 @@ module.exports = options => {
             if (scripts[scriptHash] === undefined) {
               debug(`+-->  processing local script located at "${src}"`);
 
-              let scriptPath = path.join(metalsmith._directory, metalsmith._source, src)
+              let scriptPath = path.join(metalsmith._directory, metalsmith._source, src);
+              let content;
 
-              if (!fs.existsSync(scriptPath)) {
-                console.warn(`File missing: ${scriptPath}`)
+              if (fs.existsSync(scriptPath)) {
+                scriptPath = path.join(metalsmith._directory, metalsmith._destination, src)
+                content = fs.readFileSync(scriptPath, "utf8");
+              }
+              else if (files[src.substring(1)]) {
+                content = files[src.substring(1)].contents.toString();
+
+                if (removeLocalSrc) {
+                  delete files[src.substring(1)];
+                }
+              }
+              else {
+                console.warn(`File missing: ${scriptPath}`, src, src.substring(1))
                 return;
               }
-
-              let content = fs.readFileSync(scriptPath, "utf8");
 
               if (!uglifyEnabled) {
                 scripts[scriptHash] = content;
@@ -193,7 +204,7 @@ module.exports = options => {
 
         // include script reference only when inline mode is disabled
         if (!inline) {
-          $('<script>').attr('src', siteRootPath + ouputPath + pageScriptsHash + '.min.js').appendTo('body');
+          $('<script>').attr('src', siteRootPath + outputPath + pageScriptsHash + '.min.js').appendTo('body');
         }
 
         files[file].contents = Buffer.from($.html(), 'utf-8');
@@ -220,9 +231,9 @@ module.exports = options => {
           // include script reference only when inline mode is enabled
           // else, add new packed file to metalsmith file list
           if (!inline) {
-            debug(`write packed script "${pageScriptsHash}" in "${ouputPath + pageScriptsHash + '.min.js'}" file`);
+            debug(`write packed script "${pageScriptsHash}" in "${outputPath + pageScriptsHash + '.min.js'}" file`);
 
-            files[ouputPath + pageScriptsHash + '.min.js'] = {
+            files[outputPath + pageScriptsHash + '.min.js'] = {
               contents: Buffer.from(packedScript, 'utf-8')
             }
           }

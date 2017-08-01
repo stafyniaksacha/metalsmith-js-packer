@@ -137,8 +137,9 @@ which is included and writed on filesystem
 | --- | --- | --- |
 | `inline` | `false` | if `true`, write packed content in a inline script tag instead of a local script |
 | `siteRootPath` | `/` | Use if your site root path is not `/` |
-| `ouputPath` | `assets/javascript/` | Customize output location of packed script |
+| `outputPath` | `assets/javascript/` | Customize output location of packed script |
 | `uglify` | `true` | Enable/disable script uglify |
 | `uglifyOptions` | `{}` | Options passed to [uglify](https://www.npmjs.com/package/uglify-js) |
+| `removeLocalSrc ` | `false` | If set to `true` local source files are not copied in build directory |
 
 > hint: metalsmith-js-packer use debug

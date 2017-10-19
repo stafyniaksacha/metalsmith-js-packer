@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const uglify = require('uglify-js');
+const uglify = require('uglify-es');
 const rp = require('request-promise');
 
 

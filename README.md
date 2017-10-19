@@ -140,5 +140,6 @@ which is included and writed on filesystem
 | `ouputPath` | `assets/javascript/` | Customize output location of packed script |
 | `uglify` | `true` | Enable/disable script uglify |
 | `uglifyOptions` | `{}` | Options passed to [uglify](https://www.npmjs.com/package/uglify-js) |
+| `exclude` | `[]` | [multimatch](https://www.npmjs.com/package/multimatch) patterns for file exclusion from build |
 
 > hint: metalsmith-js-packer use debug

@@ -4,8 +4,9 @@ const cheerio = require('cheerio');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const uglify = require('uglify-js');
+const uglify = require('uglify-es');
 const rp = require('request-promise');
+const multimatch = require('multimatch');
 
 
 module.exports = options => {
@@ -18,6 +19,7 @@ module.exports = options => {
   let ouputPath = options.ouputPath || 'assets/javascript/';
   let uglifyEnabled = options.uglify || true;
   let uglifyOptions = options.uglifyOptions || {};
+  let exclude = options.exclude || [];
 
   return (files, metalsmith, done) => {
     let scripts = {};
@@ -28,6 +30,11 @@ module.exports = options => {
     for (let file in files) {
       // parse only builded html files
       if (!file.endsWith('.html')) {
+        continue;
+      }
+
+      if (multimatch([file], exclude).length > 0) {
+        debug(`skipping excluded file ${file}`);
         continue;
       }
 

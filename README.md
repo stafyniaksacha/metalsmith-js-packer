@@ -39,12 +39,12 @@ Here is an example with generated HTML output file
   <head>
     <title>My awesome page !</title>
 
-    <script src="//cdn.example.com/jquery.min.js" />
-    <script src="//cdn.example.com/jquery-plugin.min.js" />
+    <script src="//cdn.example.com/jquery.min.js">
+    <script src="//cdn.example.com/jquery-plugin.min.js">
   </head>
   <body>
 
-    <!-- let's imagine we have an awesome website here -->
+    <!-- Imagine we have an awesome website here -->
 
     <script>
       var globalVariable = 'registered here';
@@ -54,7 +54,7 @@ Here is an example with generated HTML output file
       })();
     </script>
 
-    <script src="/assets/javascript/application.js" />
+    <script src="/assets/javascript/application.js">
   </body>
 </html>
 ```
@@ -68,9 +68,9 @@ Here is an example with generated HTML output file
   </head>
   <body>
 
-    <!-- let's imagine we have an awesome website here -->
+    <!-- Imagine we have an awesome website here -->
 
-    <script src="/assets/javascript/e6791aa54bf763f10700a88b38d578282663be53.min.js" />
+    <script src="/assets/javascript/e6791aa54bf763f10700a88b38d578282663be53.min.js">
   </body>
 </html>
 ```
@@ -87,12 +87,12 @@ which is included and writed on filesystem
   <head>
     <title>My awesome page !</title>
 
-    <script src="//cdn.example.com/jquery.min.js" />
-    <script src="//cdn.example.com/jquery-plugin.min.js" />
+    <script src="//cdn.example.com/jquery.min.js">
+    <script src="//cdn.example.com/jquery-plugin.min.js">
   </head>
   <body>
 
-    <!-- let's imagine we have an awesome website here -->
+    <!-- Imagine we have an awesome website here -->
 
     <script data-packer="exclude">
       var globalVariable = 'registered here';
@@ -102,7 +102,7 @@ which is included and writed on filesystem
       })();
     </script>
 
-    <script src="/assets/javascript/application.js" />
+    <script src="/assets/javascript/application.js">
   </body>
 </html>
 ```
@@ -116,7 +116,7 @@ which is included and writed on filesystem
   </head>
   <body>
 
-    <!-- let's imagine we have an awesome website here -->
+    <!-- Imagine we have an awesome website here -->
 
     <script>
       var globalVariable = 'registered here';

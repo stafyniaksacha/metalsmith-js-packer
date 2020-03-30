@@ -16,7 +16,7 @@ module.exports = options => {
   let inline = options.inline || false;
   let siteRootPath = options.siteRootPath || '/';
   let ouputPath = options.ouputPath || 'assets/javascript/';
-  let uglifyEnabled = options.uglify || true;
+  let uglifyEnabled = options.uglify !== false;
   let uglifyOptions = options.uglifyOptions || {};
 
   return (files, metalsmith, done) => {
